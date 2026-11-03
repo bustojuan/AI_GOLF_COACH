@@ -1,0 +1,3 @@
+# Opcional: solo para la futura conexión. No se necesita en la vista previa local.
+-r requirements.txt
+langchain-google-genai==4.4.2

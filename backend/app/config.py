@@ -1,0 +1,16 @@
+from pathlib import Path
+
+BACKEND_DIR = Path(__file__).resolve().parents[1]
+DATA_DIR = BACKEND_DIR / "data"
+UPLOAD_DIR = DATA_DIR / "uploads"
+RESULT_DIR = DATA_DIR / "results"
+MODEL_PATH = BACKEND_DIR / "models" / "pose_landmarker_full.task"
+MAX_UPLOAD_BYTES = 50 * 1024 * 1024
+MAX_DURATION_SECONDS = 15
+MAX_SOURCE_FPS = 240
+MAX_PROCESSED_FPS = 30
+MAX_FRAME_PIXELS = 3840 * 2160
+MAX_INFERENCE_SIDE = 1280
+PROCESSING_TIMEOUT_SECONDS = 240
+VISIBILITY_THRESHOLD = 0.5
+ALLOWED_EXTENSIONS = {".mp4", ".mov", ".webm", ".avi"}

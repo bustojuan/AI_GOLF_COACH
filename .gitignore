@@ -1,0 +1,37 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+
+# Python and local analysis data
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+*.py[cod]
+.pytest_cache/
+backend/data/
+backend/models/*.task
+
+# Node and build output
+**/node_modules/
+frontend/dist/
+**/.vite/
+*.tsbuildinfo
+
+# Local uploads, recordings and editor files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.tools/
+.qa/
+assets/samples/*.mp4
+assets/samples/*.mov
+assets/samples/*.webm
+assets/samples/*.avi

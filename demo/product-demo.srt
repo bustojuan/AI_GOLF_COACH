@@ -1,0 +1,74 @@
+1
+00:00:00,280 --> 00:00:01,824
+Tu swing tiene mucho que contar.
+
+2
+00:00:02,274 --> 00:00:04,341
+Descúbrelo desde otra perspectiva.
+
+3
+00:00:04,880 --> 00:00:10,604
+AI Golf Coach utiliza visión artificial y MediaPipe
+para estimar la posición de las articulaciones.
+
+4
+00:00:11,054 --> 00:00:14,479
+Así convierte el vídeo en un mapa
+del movimiento a lo largo del swing.
+
+5
+00:00:15,780 --> 00:00:21,213
+Una referencia elegida por ti permite comparar
+posiciones y ritmo desde una perspectiva similar.
+
+6
+00:00:24,280 --> 00:00:28,216
+El sistema propone automáticamente
+inicio, cima, impacto y final.
+
+7
+00:00:28,666 --> 00:00:31,986
+Puedes ajustar cada marca para adaptarla al movimiento real.
+
+8
+00:00:36,280 --> 00:00:40,262
+Cada línea une articulaciones
+estimadas; no es un efecto decorativo.
+
+9
+00:00:40,712 --> 00:00:45,786
+Comparar ambos esqueletos revela diferencias de
+postura difíciles de apreciar a simple vista.
+
+10
+00:00:50,280 --> 00:00:55,342
+Al alinear momentos equivalentes, ves cómo
+cambia tu postura respecto a la referencia.
+
+11
+00:00:59,280 --> 00:01:03,436
+El análisis mide la inclinación del
+torso y los ángulos de codos y rodillas.
+
+12
+00:01:03,886 --> 00:01:08,960
+Comparados con la referencia, estos datos señalan
+qué partes del movimiento conviene revisar.
+
+13
+00:01:11,880 --> 00:01:18,091
+Un modelo de inteligencia artificial interpreta estos
+resultados y propone ejercicios personalizados.
+
+14
+00:01:18,541 --> 00:01:22,651
+Por ejemplo, pausar en la cima ayuda a
+practicar una postura más repetible.
+
+15
+00:01:23,280 --> 00:01:24,290
+AI Golf Coach.
+
+16
+00:01:24,740 --> 00:01:26,586
+Tu swing. Otra perspectiva.

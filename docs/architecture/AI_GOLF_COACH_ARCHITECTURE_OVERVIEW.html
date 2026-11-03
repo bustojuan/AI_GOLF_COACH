@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>AI Golf Coach ? System Architecture Overview</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #0c1c17; }
+    body { display: grid; place-items: start center; }
+    main { width: min(100%, 1600px); }
+    svg { display: block; width: 100%; height: auto; }
+    @media (max-width: 850px) { main { width: 850px; } body { overflow-x: auto; display: block; } }
+  </style>
+</head>
+<body><main>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="950" viewBox="0 0 1600 950" role="img" aria-labelledby="title description">
+  <title id="title">AI Golf Coach — System architecture overview</title>
+  <desc id="description">A component map of the implemented local browser, FastAPI backend, pose processing, comparison, JSON persistence and optional disabled AI integration.</desc>
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c1c17"/>
+      <stop offset="1" stop-color="#081610"/>
+    </linearGradient>
+    <linearGradient id="frontend" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#203c2e"/>
+      <stop offset="1" stop-color="#193026"/>
+    </linearGradient>
+    <linearGradient id="backend" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#254b33"/>
+      <stop offset="1" stop-color="#183a29"/>
+    </linearGradient>
+    <linearGradient id="storage" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b3329"/>
+      <stop offset="1" stop-color="#162b22"/>
+    </linearGradient>
+    <filter id="shadow" x="-8%" y="-16%" width="116%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#020905" flood-opacity=".24"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L8 5 L1 9" fill="none" stroke="#bde88f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-dash" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L8 5 L1 9" fill="none" stroke="#a5c98d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text{font-family:Inter,"Segoe UI",Arial,sans-serif}
+      .navy{fill:#f5f4e9}
+      .muted{fill:#b5cabc}
+      .eyebrow{fill:#badf9c;font-size:14px;font-weight:750;letter-spacing:1.4px}
+      .panel-title{fill:#f4f4e9;font-size:23px;font-weight:780}
+      .node-title{fill:#f3f4e9;font-size:19px;font-weight:750}
+      .node-body{fill:#d6e3d7;font-size:15px}
+      .small{fill:#adc5b4;font-size:13px}
+      .arrow{fill:none;stroke:#bde88f;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+      .bus{fill:none;stroke:#bde88f;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+      .dash{fill:none;stroke:#a5c98d;stroke-width:2.2;stroke-dasharray:6 6;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow-dash)}
+    </style>
+  </defs>
+  <rect width="1600" height="950" fill="url(#page)"/>
+  <rect x="0" y="0" width="1600" height="7" fill="#c5ee92"/>
+  <g id="header">
+    <rect x="35" y="28" width="58" height="58" rx="16" fill="#274533"/>
+    <circle cx="64" cy="55" r="17" fill="none" stroke="#c7eb9b" stroke-width="2"/>
+    <path d="M59 67 V43 M60 45 Q68 40 75 45 L70 52 Q64 49 60 52" fill="none" stroke="#c7eb9b" stroke-width="2" stroke-linejoin="round"/>
+    <text x="111" y="51" fill="#badf9c" font-size="19" font-weight="700">AI GOLF COACH</text>
+    <text x="109" y="86" fill="#f5f4e9" font-size="37" font-weight="790" letter-spacing="-1">System architecture</text>
+    <text x="1565" y="48" class="eyebrow" text-anchor="end">IMPLEMENTED SYSTEM  /  LOCAL-FIRST</text>
+    <text x="1565" y="76" class="muted" font-size="15" text-anchor="end">Two recordings · one comparison · optional AI</text>
+  </g>
+
+  <g id="tech-stack" filter="url(#shadow)">
+    <rect x="35" y="124" width="266" height="790" rx="18" fill="#142c22" stroke="#557d58" stroke-width="1.5"/>
+    <text x="58" y="163" class="panel-title">Tech stack</text>
+    <line x1="58" y1="182" x2="278" y2="182" stroke="#55735c"/>
+    <g id="tech-react">
+      <circle cx="73" cy="227" r="20" fill="#274533"/>
+      <circle cx="73" cy="227" r="4" fill="#c7eb9b"/>
+      <ellipse cx="73" cy="227" rx="17" ry="7" fill="none" stroke="#c7eb9b" stroke-width="1.6"/>
+      <ellipse cx="73" cy="227" rx="17" ry="7" transform="rotate(60 73 227)" fill="none" stroke="#c7eb9b" stroke-width="1.6"/>
+      <ellipse cx="73" cy="227" rx="17" ry="7" transform="rotate(120 73 227)" fill="none" stroke="#c7eb9b" stroke-width="1.6"/>
+      <text x="105" y="222" class="node-title">React · TypeScript</text>
+      <text x="105" y="246" class="node-body">Vite · browser UI</text>
+    </g>
+    <g id="tech-api">
+      <circle cx="73" cy="339" r="20" fill="#274533"/>
+      <path d="M78 320 L62 341 H72 L68 357 L84 336 H74 Z" fill="none" stroke="#c7eb9b" stroke-width="2" stroke-linejoin="round"/>
+      <text x="105" y="335" class="node-title">FastAPI · Python</text>
+      <text x="105" y="359" class="node-body">REST · processing</text>
+    </g>
+    <g id="tech-pose">
+      <circle cx="73" cy="451" r="20" fill="#274533"/>
+      <circle cx="73" cy="443" r="4" fill="none" stroke="#c7eb9b" stroke-width="1.8"/>
+      <path d="M73 448 V460 M73 452 L62 457 M73 452 L84 457 M73 460 L66 470 M73 460 L80 470" fill="none" stroke="#c7eb9b" stroke-width="1.8" stroke-linecap="round"/>
+      <text x="105" y="447" class="node-title">OpenCV · MediaPipe</text>
+      <text x="105" y="471" class="node-body">Video · 33 landmarks</text>
+    </g>
+    <g id="tech-math">
+      <circle cx="73" cy="563" r="20" fill="#274533"/>
+      <path d="M60 570 L68 558 L75 565 L85 551 M60 575 H87" fill="none" stroke="#c7eb9b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="105" y="559" class="node-title">NumPy</text>
+      <text x="105" y="583" class="node-body">2D metrics · scores</text>
+    </g>
+    <g id="tech-visual">
+      <circle cx="73" cy="675" r="20" fill="#274533"/>
+      <rect x="61" y="664" width="24" height="20" rx="3" fill="none" stroke="#c7eb9b" stroke-width="1.8"/>
+      <path d="M65 678 L71 671 L77 675 L82 667" fill="none" stroke="#c7eb9b" stroke-width="1.6"/>
+      <text x="105" y="671" class="node-title">SVG · Three.js</text>
+      <text x="105" y="695" class="node-body">Overlays · transitions</text>
+    </g>
+    <rect x="56" y="792" width="224" height="92" rx="12" fill="#203c2e" stroke="#55735c"/>
+    <text x="72" y="822" fill="#f3f4e9" font-size="16" font-weight="750">Local-first</text>
+    <text x="72" y="846" class="node-body">No database or cloud</text>
+    <text x="72" y="868" class="node-body">storage in this version</text>
+  </g>
+
+  <g id="frontend-panel" filter="url(#shadow)">
+    <rect x="327" y="124" width="952" height="224" rx="18" fill="url(#frontend)" stroke="#557d58" stroke-width="1.5"/>
+    <circle cx="362" cy="163" r="16" fill="#365b3b"/>
+    <path d="M353 168 H371 M355 156 H369 V166 H355 Z" fill="none" stroke="#c7eb9b" stroke-width="1.8"/>
+    <text x="386" y="171" class="panel-title">Browser application</text>
+    <text x="1249" y="170" class="eyebrow" text-anchor="end">REACT · TYPESCRIPT · VITE</text>
+    <g id="user-card">
+      <rect x="349" y="198" width="230" height="125" rx="13" fill="#1d382a" stroke="#6fa25c" stroke-width="1.4"/>
+      <rect x="349" y="198" width="230" height="5" rx="2" fill="#c9ef99"/>
+      <text x="367" y="231" class="eyebrow">01 / USER SWING</text>
+      <text x="367" y="260" class="node-title">Upload video</text>
+      <text x="367" y="285" class="node-body">Setup + editable marks</text>
+      <text x="367" y="307" class="small">Local original for playback</text>
+    </g>
+    <g id="reference-card">
+      <rect x="595" y="198" width="230" height="125" rx="13" fill="#1d382a" stroke="#6fa25c" stroke-width="1.4"/>
+      <rect x="595" y="198" width="230" height="5" rx="2" fill="#82d4cf"/>
+      <text x="613" y="231" class="eyebrow">02 / REFERENCE SWING</text>
+      <text x="613" y="260" class="node-title">Upload or select</text>
+      <text x="613" y="285" class="node-body">New clip processed separately</text>
+      <text x="613" y="307" class="small">Saved JSON skips new upload</text>
+    </g>
+    <g id="results-card">
+      <rect x="841" y="198" width="416" height="125" rx="13" fill="#1d382a" stroke="#6fa25c" stroke-width="1.4"/>
+      <rect x="841" y="198" width="416" height="5" rx="2" fill="#bde88f"/>
+      <text x="861" y="231" class="eyebrow">03 / RESULTS &amp; REPORT</text>
+      <text x="861" y="260" class="node-title">Seven-screen comparison journey</text>
+      <text x="861" y="285" class="node-body">Original videos · SVG skeletons · metrics</text>
+      <text x="861" y="307" class="small">Local insights; optional generated explanation</text>
+    </g>
+  </g>
+
+  <g id="frontend-backend-links">
+    <path class="bus" d="M464 323 V387 H681 M710 323 V387 H681"/>
+    <path class="arrow" d="M681 387 H448 V504"/>
+    <rect x="480" y="350" width="250" height="27" rx="13" fill="#0c1c17"/>
+    <text x="605" y="369" fill="#badf9c" font-size="14" font-weight="700" text-anchor="middle">REST · /api/swings per new clip</text>
+    <path class="arrow" d="M917 504 V382 H1049 V324"/>
+    <rect x="937" y="350" width="182" height="27" rx="13" fill="#0c1c17"/>
+    <text x="1028" y="369" fill="#badf9c" font-size="14" font-weight="700" text-anchor="middle">ComparisonResult</text>
+  </g>
+
+  <g id="backend-panel" filter="url(#shadow)">
+    <rect x="327" y="428" width="952" height="306" rx="18" fill="url(#backend)" stroke="#709957" stroke-width="1.5"/>
+    <circle cx="362" cy="468" r="16" fill="#365b3b"/>
+    <path d="M354 467 H370 M358 460 V475 M366 460 V475" fill="none" stroke="#c7eb9b" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="386" y="477" class="panel-title">Backend core</text>
+    <text x="1249" y="474" class="eyebrow" text-anchor="end">FASTAPI · PYTHON · REST</text>
+    <g id="api-node">
+      <rect x="347" y="504" width="202" height="151" rx="13" fill="#1d382a" stroke="#5d865a" stroke-width="1.4"/>
+      <text x="365" y="537" class="eyebrow">API LAYER</text>
+      <text x="365" y="566" class="node-title">FastAPI</text>
+      <text x="365" y="593" class="node-body">Validate uploads</text>
+      <text x="365" y="616" class="small">/swings · /references</text>
+      <text x="365" y="638" class="small">Comparison · report routes</text>
+    </g>
+    <path class="arrow" d="M551 579 H566"/>
+    <g id="vision-node">
+      <rect x="571" y="504" width="214" height="151" rx="13" fill="#1d382a" stroke="#5d865a" stroke-width="1.4"/>
+      <text x="589" y="537" class="eyebrow">COMPUTER VISION</text>
+      <text x="589" y="566" class="node-title" style="font-size:18px">OpenCV · MediaPipe</text>
+      <text x="589" y="593" class="node-body">Decode · timestamp · pose</text>
+      <text x="589" y="616" class="small">33 landmarks per valid frame</text>
+      <text x="589" y="638" class="small">Four suggested swing marks</text>
+    </g>
+    <path class="arrow" d="M787 579 H797"/>
+    <g id="comparison-node">
+      <rect x="802" y="504" width="214" height="151" rx="13" fill="#1d382a" stroke="#5d865a" stroke-width="1.4"/>
+      <text x="820" y="537" class="eyebrow">COMPARISON ENGINE</text>
+      <text x="820" y="566" class="node-title" style="font-size:18px">NumPy · 2D analysis</text>
+      <text x="820" y="593" class="node-body">Align four marked instants</text>
+      <text x="820" y="616" class="small">Joint distances · angles</text>
+      <text x="820" y="638" class="small">3 phases · 4 moments · score</text>
+    </g>
+    <path class="arrow" d="M1018 579 H1027"/>
+    <g id="report-node">
+      <rect x="1032" y="504" width="225" height="151" rx="13" fill="#1d382a" stroke="#5d865a" stroke-width="1.4"/>
+      <text x="1050" y="537" class="eyebrow">COACHING DATA</text>
+      <text x="1050" y="566" class="node-title">Local report preview</text>
+      <text x="1050" y="593" class="node-body">Recompute from IDs</text>
+      <text x="1050" y="616" class="small">CoachInput + evidence</text>
+      <text x="1050" y="638" class="small">AI provider is opt-in</text>
+    </g>
+    <rect x="347" y="675" width="910" height="39" rx="10" fill="#254b33" stroke="#709957"/>
+    <text x="802" y="700" fill="#d6e3d7" font-size="14" font-weight="650" text-anchor="middle">The browser can adjust proposed marks; backend checks matching hand and camera view before comparison</text>
+  </g>
+
+  <g id="persistence-links">
+    <path class="arrow" d="M525 735 V807"/>
+    <path class="arrow" d="M1062 735 V807"/>
+    <rect x="701" y="756" width="210" height="28" rx="14" fill="#0c1c17"/>
+    <text x="806" y="775" fill="#badf9c" font-size="14" font-weight="700" text-anchor="middle">Local JSON · read / write</text>
+  </g>
+
+  <g id="storage-panel" filter="url(#shadow)">
+    <rect x="327" y="809" width="952" height="105" rx="18" fill="url(#storage)" stroke="#557d58" stroke-width="1.5"/>
+    <text x="349" y="842" class="panel-title">Data &amp; persistence</text>
+    <text x="1248" y="840" fill="#adc5b4" font-size="14" font-weight="700" text-anchor="end">LOCAL FILESYSTEM · NO DATABASE</text>
+    <rect x="348" y="858" width="267" height="41" rx="9" fill="#1d382a" stroke="#5d865a"/>
+    <text x="367" y="884" class="node-body">SwingResult JSON  ·  saved poses</text>
+    <rect x="626" y="858" width="267" height="41" rx="9" fill="#1d382a" stroke="#5d865a"/>
+    <text x="645" y="884" class="node-body">Reference JSON  ·  saved setup</text>
+    <rect x="904" y="858" width="352" height="41" rx="9" fill="#1d382a" stroke="#5d865a"/>
+    <text x="923" y="884" class="node-body">Video uploads deleted after processing</text>
+  </g>
+
+  <g id="optional-ai-panel" filter="url(#shadow)">
+    <rect x="1305" y="124" width="260" height="790" rx="18" fill="#142c22" stroke="#9ebcaa" stroke-width="1.5" stroke-dasharray="7 5"/>
+    <text x="1327" y="163" class="panel-title">Optional AI</text>
+    <rect x="1327" y="179" width="215" height="32" rx="16" fill="#274533" stroke="#55735c"/>
+    <circle cx="1345" cy="195" r="5" fill="#9ebcaa"/>
+    <text x="1360" y="200" fill="#d6e3d7" font-size="13" font-weight="750">DISABLED BY DEFAULT</text>
+    <line x1="1327" y1="232" x2="1543" y2="232" stroke="#55735c"/>
+    <rect x="1326" y="255" width="218" height="109" rx="12" fill="#1d382a" stroke="#789b7b"/>
+    <text x="1342" y="282" class="eyebrow">01 / ADAPTER</text>
+    <text x="1342" y="313" class="node-title">LangChain</text>
+    <text x="1342" y="339" class="node-body">Lazy import · opt-in</text>
+    <path class="dash" d="M1435 365 V392"/>
+    <rect x="1326" y="402" width="218" height="109" rx="12" fill="#1d382a" stroke="#789b7b"/>
+    <text x="1342" y="429" class="eyebrow">02 / EXTERNAL SERVICE</text>
+    <text x="1342" y="460" class="node-title">Gemini API</text>
+    <text x="1342" y="486" class="node-body">Model + private key</text>
+    <path class="dash" d="M1435 512 V539"/>
+    <rect x="1326" y="549" width="218" height="113" rx="12" fill="#1d382a" stroke="#789b7b"/>
+    <text x="1342" y="576" class="eyebrow">03 / VALIDATED OUTPUT</text>
+    <text x="1342" y="607" class="node-title" style="font-size:17px">CoachResponseV3</text>
+    <text x="1342" y="633" class="node-body">Evidence checked</text>
+    <line x1="1327" y1="693" x2="1543" y2="693" stroke="#55735c"/>
+    <text x="1327" y="725" fill="#f4f4e9" font-size="16" font-weight="750">Integration required</text>
+    <text x="1327" y="754" class="node-body">Optional package, model</text>
+    <text x="1327" y="778" class="node-body">and key are absent in the</text>
+    <text x="1327" y="802" class="node-body">default local setup.</text>
+    <text x="1327" y="856" class="small">The local report preview</text>
+    <text x="1327" y="876" class="small">needs none of these.</text>
+  </g>
+  <g id="optional-link">
+    <path class="dash" d="M1257 579 H1291 V310 H1322"/>
+    <rect x="1259" y="390" width="44" height="83" rx="10" fill="#0c1c17"/>
+    <text x="1281" y="431" fill="#adc5b4" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 1281 431)">EXPLICIT ONLY</text>
+  </g>
+
+  <text x="35" y="939" fill="#adc5b4" font-size="12">* 2D scoring is an experimental similarity to this reference, not an objective golf-technique grade. Ball/club detection is experimental. SciPy is not used.</text>
+</svg>
+
+</main></body></html>

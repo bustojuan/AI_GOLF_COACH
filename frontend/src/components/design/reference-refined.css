@@ -1,0 +1,104 @@
+/* Desktop refinement, isolated to the existing pilot. Small-screen rules remain in reference-pilot.css. */
+@media (min-width: 901px) {
+  .reference-pilot {
+    --ux-bg:#c4d0bf; --ux-panel:#e9eee3; --ux-secondary:#d9e2d1; --ux-ink:#20372a;
+    --ux-muted:#4a5f4d; --ux-line:#b1c1a9; --ux-field:#f5f7ef; --ux-field-line:#829779;
+    --ux-film-height:clamp(230px,calc(100dvh - 530px),550px);
+    --ux-gap:20px; --ux-radius:8px; padding:0; background:var(--ux-bg);
+  }
+  .reference-pilot[data-ux-direction=dark] {
+    --ux-bg:#243c2e; --ux-panel:#304c39; --ux-secondary:#3a5742; --ux-ink:#f1f5e9;
+    --ux-muted:#c6d5bc; --ux-line:#597451; --ux-field:#253e2c; --ux-field-line:#91a885;
+  }
+  .reference-pilot .pilot-review-bar { padding:10px 28px; background:#172c20; border-bottom:1px solid #3d5740; }
+  .reference-pilot .pilot-review-bar > span { color:#d4dfcb; font-size:10px; letter-spacing:1.7px; font-weight:600; }
+  .reference-pilot .pilot-review-edition { color:#abbfa0; font-weight:400; letter-spacing:1px; margin-left:10px; }
+  .reference-pilot .pilot-review-bar > div { background:transparent; border-color:#607458; padding:2px; border-radius:5px; }
+  .reference-pilot .pilot-review-bar button { color:#d5dfcc; font-size:11px; min-height:30px; padding:6px 12px; border-radius:3px; }
+  .reference-pilot .pilot-review-bar button[aria-pressed=true] { background:#c5ef87; color:#1c321f; box-shadow:none; }
+  .reference-pilot .pilot-review-bar button:hover { background:#34513b; color:#f4f8ed; }
+  .reference-pilot .pilot-review-bar button[aria-pressed=true]:hover { background:#d5f5a5; color:#1c321f; }
+  .reference-pilot .pilot-intro { margin:0; padding:12px 28px 15px; background:#254332; align-items:center; }
+  .reference-pilot .pilot-eyebrow { color:#c1d7ad; font-size:10px; letter-spacing:1.6px; margin-bottom:9px; }
+  .journey-content .reference-pilot .pilot-intro h2 { color:#f2f5e9; font-size:clamp(28px,2.2vw,38px); letter-spacing:-1px; }
+  .reference-pilot .pilot-intro h2 em { color:#dce9ca; }
+  .reference-pilot .pilot-intro-help > p { color:#d0dfc6; max-width:325px; font-size:12px; margin:0; line-height:1.7; }
+  .reference-pilot .pilot-workbench { padding:22px 28px 0; grid-template-columns:minmax(0,1fr) 340px; gap:22px; align-items:start; }
+  .reference-pilot .pilot-film { border:1px solid #526b4b; background:#152b20; box-shadow:0 9px 24px #1b302212; border-radius:8px; }
+  .reference-pilot .pilot-film-heading { padding:13px 18px; border-bottom:1px solid #4d6545; background:#1b3425; }
+  .journey-content .reference-pilot .pilot-film-heading h3 { font-size:14px; letter-spacing:.1px; font-weight:550; }
+  .reference-pilot .pilot-film-heading > span { color:#c3d3b7; font-size:9px; letter-spacing:1px; }
+  .reference-pilot .pilot-media-pair { grid-template-columns:1fr 1fr; gap:0; padding:0; align-items:stretch; }
+  .reference-pilot figure { display:flex; flex-direction:column; background:#243d2c; }
+  .reference-pilot figure + figure { border-left:1px solid #59714e; background:#1c3124; }
+  .reference-pilot figcaption { order:0; justify-content:space-between; gap:8px; margin:0; padding:12px 16px; border-bottom:1px solid #435d3e; background:#213b2a; color:#eff5e8; font-size:13px; }
+  .reference-pilot figcaption > span:first-child { display:flex; align-items:center; gap:9px; }
+  .reference-pilot .pilot-channel { font-size:10px; font-variant-numeric:tabular-nums; color:#c5ef87; border:1px solid #698254; padding:3px 5px; border-radius:2px; }
+  .reference-pilot .pilot-source { color:#c5d5b9; font-size:9px; letter-spacing:.7px; text-align:right; }
+  .reference-pilot .pilot-media-well { flex:1; display:flex; align-items:center; justify-content:center; padding:0 8px; }
+  .reference-pilot .pilot-media { max-height:var(--ux-film-height); height:auto; border-radius:0; background:transparent; margin:0 auto; }
+  .reference-pilot .pilot-media :is(video,img) { max-height:var(--ux-film-height); width:100%; height:100%; border-radius:0; object-fit:contain; }
+  .reference-pilot .pilot-clip-label { display:flex; align-items:center; gap:7px; color:#d7e4cb; font-size:10px; margin:0; padding:10px 16px; border-top:1px solid #425b3a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .reference-pilot .pilot-clip-label > span:last-child { margin-left:auto; color:#c1d2b3; font-size:10px; flex-shrink:0; font-variant-numeric:tabular-nums; }
+  .reference-pilot .pilot-media-meta { display:flex; gap:0; padding:13px 18px; background:#172e20; border-color:#526e46; }
+  .reference-pilot .pilot-media-meta > div { flex:1; border-right:1px solid #4a623f; padding:0 16px; }
+  .reference-pilot .pilot-media-meta > div:first-child { padding-left:0; }
+  .reference-pilot .pilot-media-meta > div:last-child { border:0; }
+  .reference-pilot .pilot-media-meta dt { font-size:10px; color:#c3d2b8; margin:0 0 5px; }
+  .reference-pilot .pilot-media-meta dd { font-size:14px; font-weight:500; }
+  .reference-pilot .pilot-media-empty { border:0; padding:24px; text-align:left; background:transparent; display:flex; align-items:center; min-height:var(--ux-film-height); max-height:none; overflow:visible; }
+  .reference-pilot .pilot-media-empty > div { width:100%; max-width:320px; margin:auto; }
+  .reference-pilot .pilot-media-empty .pilot-empty-number { font:italic 60px Georgia,serif; color:#c5d9af; margin:0 0 18px; }
+  .reference-pilot .pilot-media-empty strong { display:block; color:#f0f5e8; font:24px Georgia,serif; }
+  .reference-pilot .pilot-media-empty p { color:#c6d8b6; font-size:13px; line-height:1.8; margin-top:12px; }
+  .reference-pilot .pilot-media-empty button { margin-top:22px; display:flex; align-items:center; justify-content:space-between; gap:20px; width:100%; border:1px solid #8da976; color:#e2f5cf; background:#2c4931; font-size:12px; border-radius:3px; min-height:42px; }
+  .reference-pilot .pilot-media-empty button span { font:16px 'Segoe UI',sans-serif; margin:0; }
+  .reference-pilot .pilot-controls { background:var(--ux-panel); border:1px solid var(--ux-line); border-radius:7px; overflow:hidden; }
+  .reference-pilot .pilot-config-heading { padding:12px 18px; border-bottom:1px solid var(--ux-line); }
+  .reference-pilot .pilot-config-heading > span { color:var(--ux-muted); font-size:9px; letter-spacing:1.5px; font-weight:600; }
+  .reference-pilot .pilot-config-heading h3 { font-size:19px; font-weight:500; letter-spacing:-.5px; margin:7px 0 0; }
+  .reference-pilot .pilot-config-step { padding:12px 18px; }
+  .reference-pilot .pilot-config-step + .pilot-config-step { border-top:1px solid var(--ux-line); }
+  .reference-pilot .pilot-section-index { display:flex; align-items:center; gap:10px; font:italic 18px Georgia,serif; color:var(--ux-ink); margin:0 0 14px; }
+  .reference-pilot .pilot-section-index span { font:600 10px 'Segoe UI',sans-serif; letter-spacing:1px; color:var(--ux-muted); }
+  .journey-content .reference-pilot .pilot-controls .card { background:transparent; box-shadow:none; border:0; border-radius:0; padding:0; margin:0; }
+  .journey-content .reference-pilot .pilot-controls .card > h2 { font-size:14px; font-weight:600; margin:0 0 5px; letter-spacing:0; }
+  .reference-pilot .card > p { font-size:11px; line-height:1.65; margin:0 0 10px; }
+  .reference-pilot .pilot-user-settings .card > p { display:none; }
+  .reference-pilot .capture-setup { margin:10px 0 0; }
+  .reference-pilot .setup-grid { gap:8px; }
+  .reference-pilot label { font-size:11px; font-weight:500; }
+  .reference-pilot :is(input:not([type]),input[type=text],select) { min-height:40px; margin-top:6px; padding:9px 10px; font-size:13px; font-weight:550; border-radius:4px; border-color:var(--ux-field-line); box-shadow:inset 0 1px 1px #253b2505; }
+  .reference-pilot .pilot-controls select { appearance:none; padding-right:28px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m2 2 4 4 4-4' stroke='%23586e4d' stroke-width='1.6' fill='none'/%3E%3C/svg%3E"); background-position:right 10px center; background-repeat:no-repeat; }
+  .reference-pilot[data-ux-direction=dark] select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m2 2 4 4 4-4' stroke='%23cfdeb8' stroke-width='1.6' fill='none'/%3E%3C/svg%3E"); }
+  .reference-pilot .reference-selection { grid-template-columns:1fr; gap:4px; margin:10px 0 8px; }
+  .reference-pilot .reference-selection > button { background:transparent; border:0; border-radius:0; min-height:32px; padding:5px 0; font-size:11px; text-decoration:underline; text-underline-offset:4px; }
+  .reference-pilot .card .reference-info { border:0; border-radius:3px; padding:10px; margin:7px 0 10px; font-size:11px; line-height:1.7; }
+  .reference-pilot details { margin:0; padding:0; }
+  .reference-pilot summary { font-size:11px; line-height:1.6; min-height:35px; padding:8px 0; }
+  .reference-pilot .pilot-readiness { padding:13px 20px; border-top:1px solid var(--ux-line); font-size:11px; background:var(--ux-secondary); }
+  .reference-pilot .pilot-readiness.is-ready { border-left:3px solid #52783c; padding-left:17px; }
+  .reference-pilot .pilot-next-line { display:flex; align-items:center; gap:14px; padding:13px 28px 18px; color:var(--ux-muted); }
+  .reference-pilot .pilot-next-line > span:first-child { font-size:9px; font-weight:650; letter-spacing:1.2px; }
+  .reference-pilot .pilot-next-line p { font-size:11px; margin:0; }
+  .reference-pilot .pilot-next-line > span:last-child { margin-left:auto; font-size:18px; }
+  .reference-pilot .upload-trigger { gap:8px; }
+  .reference-pilot .upload-trigger strong { font-size:12px; }
+  .reference-pilot .upload-trigger > span > span { font-size:11px; }
+  .reference-pilot .upload-symbol { width:32px; height:32px; }
+  .reference-pilot .upload .file-info { margin:12px 0 0; }
+}
+@media (min-width:901px) and (max-height:820px) {
+  .reference-pilot { --ux-film-height:calc(100dvh - 490px); }
+  .reference-pilot .pilot-config-heading { display:none; }
+  .reference-pilot .pilot-config-step { padding:10px 16px; }
+  .reference-pilot :is(input:not([type]),input[type=text],select) { min-height:36px; padding-block:7px; }
+  .reference-pilot .pilot-review-bar { padding-block:6px; }
+  .reference-pilot .pilot-intro { padding-block:10px; }
+  .reference-pilot .pilot-workbench { padding-top:14px; }
+  .reference-pilot .pilot-next-line { display:none; }
+  .reference-pilot .pilot-film-heading { padding-block:10px; }
+  .reference-pilot figcaption { padding-block:9px; }
+  .reference-pilot .pilot-media-meta { padding-block:10px; }
+  .reference-pilot .pilot-readiness { padding-block:10px; }
+}

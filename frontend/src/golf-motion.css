@@ -1,0 +1,41 @@
+/* One stage, seven persistent screens. The arrival stroke is shared, not duplicated. */
+.golf-journey .journey-track { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); transform: none; transition: none; }
+.golf-journey .journey-screen { grid-area: 1 / 1; position: relative; visibility: hidden; pointer-events: none; background: #101813; z-index: 0; }
+.golf-journey .journey-screen[aria-hidden=false], .golf-journey .journey-screen[data-golf-exit] { visibility: visible; }
+.golf-journey .journey-screen[aria-hidden=false] { z-index: 2; pointer-events: auto; }
+.golf-journey .journey-screen[data-golf-exit] { z-index: 1; }
+@media (min-width: 901px) {
+  /* Prepare the reference panel behind the opaque upload screen before Swing & Impact starts. */
+  .golf-journey[data-step="0"]:has(.studio-state-complete) .journey-screen[data-screen="1"][inert] {
+    visibility: visible; opacity: .01; z-index: 0;
+  }
+}
+.golf-journey .journey-screen:focus { outline: none; }
+.golf-journey .journey-screen .journey-content { position: relative; animation: none; }
+.golf-journey .journey-content > .card:nth-child(2) h2 { margin-top: 4px; }
+.studio-mode .golf-journey .journey-screen[data-screen="0"] { background: #0b110e; }
+.golf-motion-layer { position: absolute; z-index: 5; inset: 0 0 38px; pointer-events: none; overflow: hidden; }
+.golf-motion-svg { display: block; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.golf-flight-3d { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+.golf-flight-atmosphere { position: absolute; inset: 0; background: radial-gradient(ellipse at 40% 45%, #23352b80, #07110cdd 75%); pointer-events: none; }
+.golf-motion-layer > .golf-motion-svg { position: relative; z-index: 1; }
+.golf-cinema-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
+.golf-journey[data-golf-edition=cinematic-3d][data-golf-state=running] .journey-golfer.is-putting { animation-duration: var(--golf-duration); }
+.golf-motion-trace, .golf-motion-wave { stroke: #c5ec83; vector-effect: non-scaling-stroke; }
+.golf-motion-trace { filter: drop-shadow(0 0 4px #c5ec8340); }
+.golf-motion-ball { filter: drop-shadow(0 0 5px #c5ec8350); }
+.golf-radar-arm, .golf-radar-ring, .golf-replay-echo { stroke: #c5ec83; vector-effect: non-scaling-stroke; }
+.golf-shared-frame { position: absolute; top: 0; left: 0; transform-origin: 0 0; object-fit: contain; background: #0b110e; border: 1px solid #9cb67b66; border-radius: 12px; will-change: transform, opacity; }
+.golf-arrival-edge { position: absolute; top: 9px; left: 36px; right: 36px; height: 2px; pointer-events: none; }
+.golf-journey[data-golf-state=running] .journey-route > span, .golf-journey[data-golf-state=running] .journey-ball { transition-duration: var(--golf-duration); transition-delay: 0ms; }
+.golf-journey[data-golf-awaiting-impact=true] .journey-actions button:last-child { border-color: #c5ec83; box-shadow: 0 0 0 2px #c5ec831c; }
+.golf-journey[data-golf-edition=refined-01][data-golf-state=running] .journey-golfer.is-putting { animation-duration: var(--golf-duration); }
+.golf-skip-motion { position: absolute; z-index: 6; bottom: 48px; right: 18px; min-height: 44px; padding: 8px 12px; display: flex; align-items: center; gap: 10px; border: 1px solid #9ab87555; border-radius: 7px; color: #d3e0c6; background: #0b110ee8; font-size: 11px; }
+.golf-skip-motion:not(:disabled):hover { background: #203021; transform: none; }
+@media (max-width: 800px) { .golf-arrival-edge { left: 22px; right: 22px; top: 7px; } }
+@media (max-width: 600px) { .golf-arrival-edge { left: 16px; right: 16px; } }
+@media (prefers-reduced-motion: reduce) {
+  .golf-motion-layer, .golf-arrival-edge { display: none; }
+  .golf-skip-motion { display: none; }
+  .golf-journey .journey-screen .journey-content { animation: none; }
+}
